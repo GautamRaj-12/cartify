@@ -1,3 +1,8 @@
+"use client";
+import type { RootState } from "@/lib/store";
+import { useDispatch } from "react-redux";
+import { addItem, removeItem, clearCart } from "@/lib/features/cart/cartSlice";
+
 type Product = {
   id: number;
   title: string;
@@ -16,6 +21,10 @@ type ProductListProps = {
 };
 
 const ProductList = (props: ProductListProps) => {
+  const dispatch = useDispatch();
+  const handleAddToCartClick = (product: Product) => {
+    dispatch(addItem(product));
+  };
   return (
     <>
       <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mx-auto my-6 w-[90%] max-w-[1200px] gap-6">
@@ -35,7 +44,12 @@ const ProductList = (props: ProductListProps) => {
               <h1>{product.title.slice(0, 30) + "..."}</h1>
               <h2>{product.price}</h2>
               <div className="flex justify-center">
-                <button className="bg-[#101014] opacity-3 text-white px-3 py-4 rounded-md font-semibold">
+                <button
+                  className="bg-[#101014] opacity-3 text-white px-3 py-4 rounded-md font-semibold"
+                  onClick={() => {
+                    handleAddToCartClick(product);
+                  }}
+                >
                   Add to Cart
                 </button>
               </div>
