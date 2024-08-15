@@ -1,5 +1,4 @@
 "use client";
-import type { RootState } from "@/lib/store";
 import { useDispatch } from "react-redux";
 import { addItem, removeItem, clearCart } from "@/lib/features/cart/cartSlice";
 
@@ -9,6 +8,7 @@ type Product = {
   price: number;
   category: string;
   description: string;
+  quantity: number;
   image: string;
   rating: {
     rate: number;
