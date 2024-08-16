@@ -11,21 +11,30 @@ const Header = () => {
       <header className="bg-[#101014] opacity-3 text-white">
         <nav className="max-w-[1200px] mx-auto my-0 flex justify-around items-center p-6">
           <Link href="/">
-            <h1 className="uppercase text-2xl font-semibold tracking-wider cursor-pointer">
+            <h1 className="uppercase text-3xl font-semibold tracking-wider cursor-pointer text-rose-600">
               Cartify
             </h1>
           </Link>
-          <ul className="flex gap-6 items-center text-xl tracking-wide cursor-pointer">
-            <Link href="/">
-              <li>Home</li>
+          <ul className="flex gap-6 items-center text-2xl tracking-wide cursor-pointer">
+            <Link href="/" className="relative">
+              <li className="after:h-1 after:w-full after:block after:absolute after:bg-rose-600 after:opacity-0 after:hover:opacity-100 after:hover:transition-all after:hover:duration-500 active:-translate-y-1 active:transition-all">
+                Home
+              </li>
             </Link>
-            <li className="flex items-center gap-1">
-              <FaCartShopping />
-              <Link href={"/cart"}>
+            <Link href="/cart">
+              <li className="flex items-center gap-2 relative active:-translate-y-1 active:transition-all">
+                <FaCartShopping />
+                <div className="absolute bg-rose-600 w-6 h-6 left-4 -bottom-2 rounded-full flex justify-center items-center">
+                  <p className="text-sm text-white font-bold">
+                    {cartItems.length}
+                  </p>
+                </div>
+                {/* <Link href={"/cart"}>
                 <span>Cart</span>
-              </Link>
-            </li>
-            <li>{cartItems.length}</li>
+              </Link> */}
+              </li>
+            </Link>
+            <li></li>
           </ul>
         </nav>
       </header>
