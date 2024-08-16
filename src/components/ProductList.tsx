@@ -45,7 +45,7 @@ const ProductList = (props: ProductListProps) => {
               <h2>{product.price}</h2>
               <div className="flex justify-center">
                 <button
-                  className="bg-[#101014] opacity-3 text-white px-3 py-4 rounded-md font-semibold"
+                  className="bg-[#101014] opacity-3 text-white px-3 py-4 rounded-md font-semibold hover:-translate-y-2 hover:bg-white hover:border hover:border-[#101014] hover:text-[#101014] transition-all duration-300"
                   onClick={() => {
                     handleAddToCartClick(product);
                   }}
