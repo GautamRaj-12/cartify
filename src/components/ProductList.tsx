@@ -23,7 +23,7 @@ type ProductListProps = {
 const ProductList = (props: ProductListProps) => {
   const dispatch = useDispatch();
   const handleAddToCartClick = (product: Product) => {
-    dispatch(addItem(product));
+    dispatch(addItem({ ...product, quantity: 1 }));
   };
   return (
     <>
