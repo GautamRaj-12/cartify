@@ -1,6 +1,8 @@
 "use client";
 import { useDispatch } from "react-redux";
-import { addItem, removeItem, clearCart } from "@/lib/features/cart/cartSlice";
+import { addItem } from "@/lib/features/cart/cartSlice";
+import { useState } from "react";
+import Notifications from "./Notifications";
 
 type Product = {
   id: number;
@@ -21,9 +23,14 @@ type ProductListProps = {
 };
 
 const ProductList = (props: ProductListProps) => {
+  const [notify, setNotify] = useState<Boolean>(false);
   const dispatch = useDispatch();
   const handleAddToCartClick = (product: Product) => {
     dispatch(addItem({ ...product, quantity: 1 }));
+    setNotify(true);
+    setTimeout(() => {
+      setNotify(false);
+    }, 3000);
   };
   return (
     <>
@@ -59,6 +66,7 @@ const ProductList = (props: ProductListProps) => {
           );
         })}
       </div>
+      {notify && <Notifications />}
     </>
   );
 };

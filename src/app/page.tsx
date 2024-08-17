@@ -1,6 +1,5 @@
 "use client";
 import Header from "@/components/Header";
-import Notifications from "@/components/Notifications";
 import ProductList from "@/components/ProductList";
 import { useEffect, useState } from "react";
 
@@ -34,7 +33,6 @@ export default function Home() {
     <>
       <Header />
       <ProductList products={products} />
-      <Notifications />
     </>
   );
 }

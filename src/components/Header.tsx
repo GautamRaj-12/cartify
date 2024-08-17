@@ -8,7 +8,7 @@ const Header = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   return (
     <>
-      <header className="bg-[#F2F0FF] opacity-3 text-[#0D0E43]">
+      <header className="bg-[#F2F0FF] opacity-3 text-[#0D0E43] sticky top-0">
         <nav className="max-w-[1200px] mx-auto my-0 flex justify-around items-center p-6">
           <Link href="/">
             <h1 className="text-3xl font-semibold tracking-wider cursor-pointer">

@@ -13,6 +13,14 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      keyframes: {
+        noti: {
+          "100%": { width: "0" },
+        },
+      },
+      animation: {
+        "noti-animation": "noti 3s linear forwards",
+      },
     },
   },
   plugins: [],
