@@ -28,19 +28,19 @@ const Cart = () => {
     <>
       <Header />
       <section className="w-1/2 mx-auto my-6">
-        <p className="text-xl font-bold mt-6 text-right mb-6">
-          Total: ${cartTotal.toFixed(2)}
+        <p className="text-xl font-semibold mt-6 text-right mb-6 text-[#0D0E43]">
+          Total: $ {cartTotal.toFixed(2)}
         </p>
         <div className="grid grid-cols-3 gap-8 mb-4 items-center">
-          <div className="bg-[#101014]">
+          <div className="bg-[#0D0E43]">
             <p className="text-center text-white p-2 rounded-sm">Item</p>
           </div>
-          <div className="bg-[#101014]">
+          <div className="bg-[#0D0E43]">
             <p className="text-center text-white p-2 rounded-sm">
               Price(per unit)
             </p>
           </div>
-          <div className="bg-[#101014]">
+          <div className="bg-[#0D0E43]">
             <p className="text-center text-white p-2 rounded-sm">Qty</p>
           </div>
         </div>
@@ -48,7 +48,7 @@ const Cart = () => {
           return (
             <div
               key={cartItem.id}
-              className="grid grid-cols-3 gap-8 mb-4 items-center"
+              className="grid grid-cols-3 gap-8 mb-4 items-center text-[#0D0E43]"
             >
               <div className="self-center justify-self-start flex justify-center items-center gap-6 p-1">
                 <img
@@ -77,7 +77,7 @@ const Cart = () => {
                   onClick={() => handleRemoveItemClick(cartItem.id)}
                   className="text-red-600 hover:underline"
                 >
-                  <FaTrash />
+                  <FaTrash color="#FB2E86" />
                 </button>
               </div>
             </div>

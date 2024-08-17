@@ -32,20 +32,22 @@ const ProductList = (props: ProductListProps) => {
           return (
             <div
               key={product.id}
-              className="flex flex-col gap-6 p-2 border-2 rounded-md"
+              className="flex flex-col gap-6 shadow-lg rounded-md"
             >
-              <div className="h-64 rounded-2xl shadow-2xl">
+              <div className="h-64 shadow-xl bg-[#F7F7F7] flex justify-center items-center">
                 <img
                   src={product.image}
                   alt=""
-                  className="h-full w-full rounded-xl"
+                  className="h-[60%] w-[70%] rounded-xl"
                 />
               </div>
-              <h1>{product.title.slice(0, 30) + "..."}</h1>
-              <h2>{product.price}</h2>
-              <div className="flex justify-center">
+              <div className="p-2 flex justify-between text-[#151875]">
+                <h1>{product.title.slice(0, 30) + "..."}</h1>
+                <h2>$ {product.price}</h2>
+              </div>
+              <div className="flex justify-center p-2">
                 <button
-                  className="bg-[#101014] opacity-3 text-white px-3 py-4 rounded-md font-semibold hover:-translate-y-2 hover:bg-white hover:border hover:border-[#101014] hover:text-[#101014] transition-all duration-300"
+                  className="bg-[#FB2E86] opacity-3 text-white px-3 py-[10px] rounded-sm font-semibold hover:-translate-y-2 hover:bg-white hover:border hover:border-[#FB2E86] hover:text-[#151875] transition-all duration-300"
                   onClick={() => {
                     handleAddToCartClick(product);
                   }}
