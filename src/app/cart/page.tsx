@@ -65,17 +65,17 @@ const Cart = () => {
       <Header />
       <section className="w-1/2 mx-auto my-6">
         <div className="flex justify-around items-center">
-          <p className="text-xl font-semibold mt-6 mb-6 text-[#0D0E43]">
+          <p className="text-xl font-semibold mt-6 mb-6 text-headingDark">
             Total: {USDollar.format(cartTotal)}
           </p>
-          <p className="text-xl font-semibold mt-6 mb-6 text-[#0D0E43]">
+          <p className="text-xl font-semibold mt-6 mb-6 text-headingDark">
             Discount: {USDollar.format(discount)}
           </p>
-          <p className="text-xl font-semibold mt-6 mb-6 text-[#0D0E43]">
+          <p className="text-xl font-semibold mt-6 mb-6 text-headingDark">
             Final Total: {USDollar.format(cartTotal - discount)}
           </p>
           <button
-            className="bg-[#FB2E86] opacity-3 text-white px-3 h-12 rounded-sm font-semibold hover:-translate-y-2 hover:bg-white hover:border hover:border-[#FB2E86] hover:text-[#151875] transition-all duration-300 disabled:cursor-not-allowed"
+            className="bg-accent opacity-3 text-white px-3 h-12 rounded-sm font-semibold hover:-translate-y-2 hover:bg-white hover:border hover:border-accent hover:text-textPrimary transition-all duration-300 disabled:cursor-not-allowed"
             onClick={handleCheckout}
             disabled={buttonDisable}
           >
@@ -83,15 +83,15 @@ const Cart = () => {
           </button>
         </div>
         <div className="grid grid-cols-3 gap-8 mb-4 items-center">
-          <div className="bg-[#0D0E43]">
+          <div className="bg-headingDark">
             <p className="text-center text-white p-2 rounded-sm">Item</p>
           </div>
-          <div className="bg-[#0D0E43]">
+          <div className="bg-headingDark">
             <p className="text-center text-white p-2 rounded-sm">
               Price(per unit)
             </p>
           </div>
-          <div className="bg-[#0D0E43]">
+          <div className="bg-headingDark">
             <p className="text-center text-white p-2 rounded-sm">Qty</p>
           </div>
         </div>
@@ -99,7 +99,7 @@ const Cart = () => {
           return (
             <div
               key={cartItem.id}
-              className="grid grid-cols-3 gap-8 mb-4 items-center text-[#0D0E43]"
+              className="grid grid-cols-3 gap-8 mb-4 items-center text-headingDark"
             >
               <div className="self-center justify-self-start flex justify-center items-center gap-6 p-1">
                 <img
@@ -124,10 +124,7 @@ const Cart = () => {
                   }
                   className="w-16 text-center border border-gray-300 rounded"
                 />
-                <button
-                  onClick={() => handleRemoveItemClick(cartItem.id)}
-                  className="text-red-600 hover:underline"
-                >
+                <button onClick={() => handleRemoveItemClick(cartItem.id)}>
                   <FaTrash color="#FB2E86" />
                 </button>
               </div>
