@@ -1,6 +1,7 @@
 "use client";
 import Header from "@/components/Header";
 import ProductList from "@/components/ProductList";
+import Skeleton from "@/components/Skeleton";
 import { useEffect, useState } from "react";
 
 export const fetchProductsData = async () => {
@@ -19,11 +20,13 @@ export const fetchProductsData = async () => {
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+  const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   useEffect(() => {
     const getProducts = async () => {
       const data = await fetchProductsData();
       if (data) {
         console.log(data);
+        setLoadingSkeleton(false);
         setProducts(data);
       }
     };
@@ -32,7 +35,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <ProductList products={products} />
+      {loadingSkeleton ? <Skeleton /> : <ProductList products={products} />}
     </>
   );
 }
