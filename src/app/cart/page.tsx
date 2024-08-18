@@ -14,7 +14,7 @@ import { useState, useEffect } from "react";
 import { FaAngleDoubleDown } from "react-icons/fa";
 import Link from "next/link";
 
-const Cart = () => {
+export default function Page() {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const cartTotal = useSelector(selectCartTotal);
   const dispatch = useDispatch();
@@ -34,8 +34,8 @@ const Cart = () => {
 
   const handleCheckout = () => {
     if (cartItems.length >= 1) {
-      dispatch(clearCart());
       router.push("/checkout");
+      dispatch(clearCart());
     }
   };
 
@@ -158,5 +158,4 @@ const Cart = () => {
       </section>
     </>
   );
-};
-export default Cart;
+}

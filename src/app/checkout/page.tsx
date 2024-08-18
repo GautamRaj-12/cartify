@@ -1,7 +1,7 @@
 import { FaHeart } from "react-icons/fa6";
 import Link from "next/link";
 
-const Checkout = () => {
+export default function Page() {
   return (
     <>
       <div className="flex flex-col w-screen h-screen items-center justify-center gap-6 text-textPrimary">
@@ -19,6 +19,4 @@ const Checkout = () => {
       </div>
     </>
   );
-};
-
-export default Checkout;
+}
