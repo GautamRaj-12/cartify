@@ -32,6 +32,10 @@ const ProductList = (props: ProductListProps) => {
       setNotify(false);
     }, 3000);
   };
+  let USDollar = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
   return (
     <>
       <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mx-auto my-6 w-[90%] max-w-[1200px] gap-6">
@@ -50,7 +54,7 @@ const ProductList = (props: ProductListProps) => {
               </div>
               <div className="p-2 flex justify-between text-[#151875]">
                 <h1>{product.title.slice(0, 30) + "..."}</h1>
-                <h2>$ {product.price}</h2>
+                <h2>{USDollar.format(product.price)}</h2>
               </div>
               <div className="flex justify-center p-2">
                 <button

@@ -6,13 +6,19 @@ import {
   selectCartTotal,
   updateItemQuantity,
   removeItem,
+  clearCart,
 } from "@/lib/features/cart/cartSlice";
 import { FaTrash } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 const Cart = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const cartTotal = useSelector(selectCartTotal);
   const dispatch = useDispatch();
+  const router = useRouter();
+
+  const [buttonDisable, setButtonDisable] = useState<boolean>(true);
 
   const handleQuantityChange = (id: number, newQuantity: number) => {
     if (newQuantity >= 1) {
@@ -24,13 +30,58 @@ const Cart = () => {
     dispatch(removeItem(id));
   };
 
+  const handleCheckout = () => {
+    if (cartItems.length >= 1) {
+      dispatch(clearCart());
+      router.push("/checkout");
+    }
+  };
+
+  useEffect(() => {
+    if (cartItems.length >= 1) {
+      setButtonDisable(false);
+    } else {
+      setButtonDisable(true);
+    }
+  }, [cartItems]);
+
+  let USDollar = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
+  let discount = 0;
+  if (cartTotal >= 100 && cartTotal < 200) {
+    discount = cartTotal * 0.2;
+  }
+  if (cartTotal >= 200 && cartTotal < 500) {
+    discount = cartTotal * 0.3;
+  }
+  if (cartTotal >= 500) {
+    discount = cartTotal * 0.4;
+  }
   return (
     <>
       <Header />
       <section className="w-1/2 mx-auto my-6">
-        <p className="text-xl font-semibold mt-6 text-right mb-6 text-[#0D0E43]">
-          Total: $ {cartTotal.toFixed(2)}
-        </p>
+        <div className="flex justify-around items-center">
+          <p className="text-xl font-semibold mt-6 mb-6 text-[#0D0E43]">
+            Total: {USDollar.format(cartTotal)}
+          </p>
+          <p className="text-xl font-semibold mt-6 mb-6 text-[#0D0E43]">
+            Discount: {USDollar.format(discount)}
+          </p>
+          <p className="text-xl font-semibold mt-6 mb-6 text-[#0D0E43]">
+            Final Total: {USDollar.format(cartTotal - discount)}
+          </p>
+          <button
+            className="bg-[#FB2E86] opacity-3 text-white px-3 h-12 rounded-sm font-semibold hover:-translate-y-2 hover:bg-white hover:border hover:border-[#FB2E86] hover:text-[#151875] transition-all duration-300 disabled:cursor-not-allowed"
+            onClick={handleCheckout}
+            disabled={buttonDisable}
+          >
+            Checkout
+          </button>
+        </div>
         <div className="grid grid-cols-3 gap-8 mb-4 items-center">
           <div className="bg-[#0D0E43]">
             <p className="text-center text-white p-2 rounded-sm">Item</p>
@@ -61,7 +112,7 @@ const Cart = () => {
                 </h1>
               </div>
               <h2 className="justify-self-center">
-                ${cartItem.price.toFixed(2)}
+                {USDollar.format(cartItem.price)}
               </h2>
               <div className="justify-self-center flex gap-6">
                 <input
