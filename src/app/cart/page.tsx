@@ -11,6 +11,8 @@ import {
 import { FaTrash } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { FaAngleDoubleDown } from "react-icons/fa";
+import Link from "next/link";
 
 const Cart = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -63,26 +65,19 @@ const Cart = () => {
   return (
     <>
       <Header />
-      <section className="w-1/2 mx-auto my-6">
-        <div className="flex justify-around items-center">
-          <p className="text-xl font-semibold mt-6 mb-6 text-headingDark">
-            Total: {USDollar.format(cartTotal)}
-          </p>
-          <p className="text-xl font-semibold mt-6 mb-6 text-headingDark">
-            Discount: {USDollar.format(discount)}
-          </p>
-          <p className="text-xl font-semibold mt-6 mb-6 text-headingDark">
-            Final Total: {USDollar.format(cartTotal - discount)}
-          </p>
-          <button
-            className="bg-accent opacity-3 text-white px-3 h-12 rounded-sm font-semibold hover:-translate-y-2 hover:bg-white hover:border hover:border-accent hover:text-textPrimary transition-all duration-300 disabled:cursor-not-allowed"
-            onClick={handleCheckout}
-            disabled={buttonDisable}
+      <section className="lg:w-1/2 w-full p-4 mx-auto my-6">
+        <p className="flex justify-end gap-8 text-xl font-semibold text-headingDark border-y-2 border-headingDark px-2 py-1 mb-1">
+          <span>Final Total: </span>
+          <span className="font-medium">{USDollar.format(cartTotal)}</span>
+          <Link
+            href="#checkout"
+            className="flex items-center gap-2 text-xl text-accent"
           >
-            Checkout
-          </button>
-        </div>
-        <div className="grid grid-cols-3 gap-8 mb-4 items-center">
+            Checkout <FaAngleDoubleDown />
+          </Link>
+        </p>
+
+        <div className="grid grid-cols-3 gap-8 mb-4 sm:items-center items-stretch">
           <div className="bg-headingDark">
             <p className="text-center text-white p-2 rounded-sm">Item</p>
           </div>
@@ -95,13 +90,14 @@ const Cart = () => {
             <p className="text-center text-white p-2 rounded-sm">Qty</p>
           </div>
         </div>
+
         {cartItems.map((cartItem) => {
           return (
             <div
               key={cartItem.id}
-              className="grid grid-cols-3 gap-8 mb-4 items-center text-headingDark"
+              className="grid grid-cols-3 gap-8 mb-4 items-center text-headingDark bg-backgroundLight p-2"
             >
-              <div className="self-center justify-self-start flex justify-center items-center gap-6 p-1">
+              <div className="self-center justify-self-start flex sm:flex-row flex-col justify-center items-center gap-6 p-1">
                 <img
                   src={cartItem.image}
                   alt={cartItem.title}
@@ -124,13 +120,41 @@ const Cart = () => {
                   }
                   className="w-16 text-center border border-gray-300 rounded"
                 />
-                <button onClick={() => handleRemoveItemClick(cartItem.id)}>
+                <button
+                  onClick={() => handleRemoveItemClick(cartItem.id)}
+                  className="mr-1"
+                >
                   <FaTrash color="#FB2E86" />
                 </button>
               </div>
             </div>
           );
         })}
+
+        <div className="flex flex-col items-center">
+          <p className="text-xl font-semibold text-headingDark border-y-2 border-headingDark px-2 py-1 mb-1">
+            <span>Total: </span>
+            <span className="font-medium">{USDollar.format(cartTotal)}</span>
+          </p>
+          <p className="text-xl font-semibold text-headingDark border-b-2 border-headingDark px-2 py-1 mb-1">
+            <span>Discount: </span>{" "}
+            <span className="font-medium">{USDollar.format(discount)}</span>
+          </p>
+          <p className="text-xl font-semibold text-headingDark border-b-2 border-headingDark px-2 py-1 mb-1">
+            <span>Final Total: </span>{" "}
+            <span className="font-medium">
+              {USDollar.format(cartTotal - discount)}
+            </span>
+          </p>
+          <button
+            className="bg-accent opacity-3 text-white px-3 h-12 sm:w-auto w-full col-span-1 rounded-sm font-semibold hover:-translate-y-2 hover:bg-white hover:border hover:border-accent hover:text-textPrimary transition-all duration-300 disabled:cursor-not-allowed mt-4"
+            onClick={handleCheckout}
+            disabled={buttonDisable}
+            id="checkout"
+          >
+            Checkout
+          </button>
+        </div>
       </section>
     </>
   );
